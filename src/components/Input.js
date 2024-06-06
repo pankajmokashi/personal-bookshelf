@@ -1,10 +1,10 @@
 import React from "react";
 
-function Input({ value, onChange }) {
+function Input({ onChange }) {
   return (
     <div className="input-field">
       <div>Search by book name: </div>
-      <input type="text" value={value} onChange={onChange} />
+      <input type="text" onChange={onChange} />
     </div>
   );
 }

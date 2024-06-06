@@ -10,6 +10,7 @@ function Book({ book, showButton }) {
     localStorage.setItem("myBookShelf", JSON.stringify(myBookShelf));
     setAddedToShelf(true);
   };
+  
   return (
     <div className="book">
       <div className="info">

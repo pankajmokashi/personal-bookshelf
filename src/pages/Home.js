@@ -1,48 +1,43 @@
-import React, { forwardRef, useEffect, useState } from "react";
-import Input from "../components/Input";
+import React, { useState } from "react";
 import axios from "axios";
 import BookShelf from "../components/BookShelf";
+import Input from "../components/Input";
 
-const Home = forwardRef((props, ref) => {
-  const [value, setvalue] = useState("");
+const Home = () => {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      if (value.trim() !== "") {
-        fetchBooks(value);
-      }
-    }, 300);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [value]);
-
-  const fetchBooks = async (val) => {
-    setIsLoading(true);
-    try {
-      const res = await axios.get(
-        `https://openlibrary.org/search.json?q=${val}&limit=10&page=1`
-      );
-      setData(res.data.docs);
-    } catch (e) {
-      console.log("error");
-    } finally {
-      setIsLoading(false);
-    }
+  const debounce = (onChange) => {
+    let timeout;
+    return (e) => {
+      const form = e.currentTarget.value;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        onChange(form);
+      }, 1000);
+    };
   };
 
-  const handleInputChange = (e) => {
-    setvalue(e.target.value);
+  const fetchBooks = async (value) => {
+    try {
+      const res = await axios.get(
+        `https://openlibrary.org/search.json?q=${value}&limit=10&page=1`
+      );
+      setData(res.data.docs);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   return (
     <div className="container">
-      <Input ref={ref} value={value} onChange={handleInputChange} />
-      {isLoading && <p>Loading...</p>}
-      {data.length > 0 && <BookShelf books={data} showButton={true}/>}
+      <Input
+        onChange={debounce((e) => {
+          fetchBooks(e);
+        })}
+      />
+      {data.length > 0 && <BookShelf books={data} showButton={true} />}
     </div>
   );
-});
+};
 
 export default Home;
