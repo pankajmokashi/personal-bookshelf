@@ -1,38 +1,159 @@
-.App {
-  text-align: center;
+nav {
+    padding: 0 1rem;
+    width: calc(100% - 2rem);
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+nav .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    width: 100%;
+    height: 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navbar a {
+    padding: 0 1rem;
+    border: 1px solid white;
+    text-decoration: none;
+    color: white;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.active {
+    background-color: white;
+    color: black !important;
 }
 
-.App-link {
-  color: #61dafb;
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    width: calc(100% - 2rem);
+    margin: 0 auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.input-field {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input-field input {
+    border: 1px solid black;
+    outline: none;
+    padding: 0.25rem 0.5rem;
+    width: calc(50% - 1rem);
+    max-width: 600px;
+    font-size: 1rem;
+}
+
+.bookshelf {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.book {
+    padding: 10px;
+    width: calc(27% - 20px);
+    height: calc(160px - 20px);
+    border: 1px solid black;
+    position: relative;
+}
+
+.book .info {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 3px;
+}
+
+.info .title {
+    white-space: nowrap;
+}
+
+.info .value {
+    max-height: 2.1rem;
+    overflow: hidden;
+}
+
+.book-btn {
+    margin-top: 0.5rem;
+    position: absolute;
+    bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 2rem);
+}
+
+.book-btn button {
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.grey {
+    background-color: gray;
+    color: black;
+}
+
+.green {
+    background-color: green;
+    color: white;
+}
+
+@media screen and (min-width: 1000px) {
+
+    .navbar,
+    .container {
+        max-width: 1000px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .book {
+        width: 40%;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .input-field {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .input-field input {
+        width: 80%;
+        font-size: 0.8rem;
+    }
+
+    nav a {
+        font-size: 0.8rem;
+    }
+
+    .book {
+        width: calc(80% - 20px);
+        height: calc(130px - 20px);
+        font-size: 0.8rem;
+    }
+
+    .book-btn button {
+        font-size: 0.6rem;
+    }
 }
